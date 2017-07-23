@@ -46,15 +46,40 @@ module.exports.routes = {
     action: 'signup'
   },
 
-  'POSt /login': {
+  'POST /login': {
     controller: 'auth',
     action: 'login'
   },
 
-  'POSt /signup': {
+  'POST /signup': {
     controller: 'auth',
     action: 'signup'
   },
+
+  'GET /videos': {
+    controller: 'user',
+    action: 'viewVideos'
+  },
+
+  'POST /video/new': {
+    controller: 'video',
+    action: 'new'
+  },
+
+  'POST /video/edit': {
+    controller: 'video',
+    action: 'edit'
+  },
+
+  'POST /video/delete': {
+    controller: 'video',
+    action: 'delete'
+  },
+
+  'GET /videos/queue': {
+    controller: 'video',
+    action: 'readyQueue'
+  }
 
 
 

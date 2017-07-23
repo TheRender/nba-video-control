@@ -9,7 +9,7 @@ module.exports = {
 
   login: function(req, res) {
     if (req.user != undefined) {
-      res.redirect('/dashboard');
+      res.redirect('/videos');
     } else {
       res.render('login');
     }
@@ -17,7 +17,7 @@ module.exports = {
 
   signup: function(req, res) {
     if (req.user != undefined) {
-      res.redirect('/dashboard');
+      res.redirect('/videos');
     } else {
       res.render('signup');
     }
