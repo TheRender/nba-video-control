@@ -59,22 +59,25 @@ module.exports = {
         });
       }
     });
-
-    readyQueue: function(req, res) {
-      Video.find({
-        status: "Queued"
-      }).exec(function(err, videos) {
-        if (err || videos == undefined) {
-          console.log("There was an error finding the queued videos.");
-          console.log("Error = " + err);
-          res.serverError();
-        } else {
-          res.send({
-            videos: videos
-          });
-        }
-      });
-    },
   },
+
+  readyQueue: function(req, res) {
+    Video.find({
+      status: "Queued"
+    }).exec(function(err, videos) {
+      if (err || videos == undefined) {
+        console.log("There was an error finding the queued videos.");
+        console.log("Error = " + err);
+        res.serverError();
+      } else {
+        res.send({
+          videos: videos
+        });
+      }
+    });
+  },
+
+
+
 
 };
