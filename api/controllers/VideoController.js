@@ -77,7 +77,69 @@ module.exports = {
     });
   },
 
+  returnState: function(req, res) {
+    StateService.getState(function(err, state) {
+      if (err || state == undefined) {
+        console.log("There was an error finding the state.");
+        console.log("Error = " + err);
+        res.serverError();
+      } else {
+        res.send({
+          state: state
+        });
+      }
+    });
+  },
 
-
-
+  getLatest: function(req, res) {
+    var state;
+    var video;
+    async.series([
+        function(callback) {
+          StateService.getState(function(err, states) {
+            if (err || states == undefined) {
+              console.log("There was an error finding the state.");
+              console.log("Error = " + err);
+              res.serverError();
+            } else {
+              state = states;
+            }
+          });
+        },
+        function(callback) {
+          if (state.locked == true) {
+            res.send({
+              locked: state.locked
+            });
+          } else {
+            callback();
+          }
+        },
+        function(callback) {
+          Video.find({
+            where: {
+              status: "queued"
+            },
+            limit: 1,
+            sort: {
+              createdAt: -1
+            }
+          }).exec(function(err, videos) {
+            if (err || videos == undefined) {
+              console.log("There was an error finding the videos.");
+              console.log("Error = " + err);
+              res.serverError();
+            } else {
+              video = videos[0];
+              callback();
+            }
+          });
+        }
+      ],
+      function(callback) {
+        res.send({
+          video: video
+        });
+      });
+  },
 };
