@@ -30,19 +30,20 @@ module.exports = {
       return obj;
     },
 
-    // Encrypt password before object is created
-    beforeCreate: function(user, cb) {
-      bcrypt.genSalt(10, function(err, salt) {
-        bcrypt.hash(user.password, salt, function() {}, function(err, hash) {
-          if (err) {
-            console.log(err);
-          } else {
-            user.password = hash;
-            cb(null, user);
-          }
-        });
-      });
-    }
+  },
 
+  // Encrypt password before object is created
+  beforeCreate: function(user, cb) {
+    console.log("BEFORE CREATE");
+    bcrypt.genSalt(10, function(err, salt) {
+      bcrypt.hash(user.password, salt, function() {}, function(err, hash) {
+        if (err) {
+          console.log(err);
+        } else {
+          user.password = hash;
+          cb(null, user);
+        }
+      });
+    });
   }
 };

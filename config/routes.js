@@ -56,6 +56,11 @@ module.exports.routes = {
     action: 'signup'
   },
 
+  'GET /logout': {
+    controller: 'auth',
+    action: 'logout'
+  },
+
   'GET /videos': {
     controller: 'user',
     action: 'viewVideos'
@@ -79,7 +84,12 @@ module.exports.routes = {
   'GET /videos/queue': {
     controller: 'video',
     action: 'readyQueue'
-  }
+  },
+
+  'GET /addVideo': {
+    controller: 'user',
+    action: 'addVideo'
+  },
 
 
 
