@@ -68,7 +68,7 @@ module.exports = {
                 },
                 components: [
                   'views/dash/components/Navbar',
-                  'views/dash/components/VideoListing',
+                  'views/dash/components/Videolisting',
                 ]
               }
             });
