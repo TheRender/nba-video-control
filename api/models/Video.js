@@ -29,5 +29,9 @@ module.exports = {
       type: 'array',
       defaultsTo: []
     },
+
+    machine: {
+      type: 'string'
+    }
   }
 };

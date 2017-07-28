@@ -14,7 +14,8 @@ module.exports = {
       status: "Queued",
       player: post.player,
       description: post.description,
-      urls: post.urls
+      urls: post.urls,
+      machine: "Not assigned"
     };
     async.series([
       function(callback) {
@@ -50,25 +51,20 @@ module.exports = {
 
   edit: function(req, res) {
     var post = req.body;
-    Video.update(post).exec(function(err) {
-      if (err) {
+    Video.update({
+      id: post.id
+    }, post).exec(function(err, updated) {
+      if (err || updated == undefined) {
         console.log("There was an error editing the video.");
         console.log("Error = " + err);
         res.serverError();
       } else {
-        Video.findOne({
-          id: post.id
-        }).exec(function(err, vid) {
-          if (err || vid == undefined) {
-            console.log("There was an error finding the vid.");
-            console.log("Error = " + err);
-            res.serverError();
-          } else {
-            sails.sockets.blast(vid.id, vid);
-            res.send({
-              success: true
-            });
-          }
+        console.log(post.id);
+        console.log("UPDATED");
+        console.log(updated[0]);
+        sails.sockets.blast(updated[0].id, updated[0]);
+        res.send({
+          success: true
         });
       }
     });

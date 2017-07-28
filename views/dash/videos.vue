@@ -13,19 +13,28 @@
                   Title
                 </th>
                 <th>
+                  Player Name
+                </th>
+                <th>
                   Status
                 </th>
                 <th>
                   Description
+                </th>
+                <th>
+                  Machine
                 </th>
               </tr>
             </thead>
             <tbody>
               <videolisting
                 v-for="video in videos"
-                v-bind:title="video.title"
-                v-bind:description="video.description"
-                v-bind:status="video.status"
+                v-bind:initialtitle="video.title"
+                v-bind:initialdescription="video.description"
+                v-bind:initialstatus="video.status"
+                v-bind:initialplayer="video.player"
+                v-bind:initialmachine="video.machine"
+                v-bind:initialid="video.id"
                 :key="video.id"
               ></videolisting>
             </tbody>
@@ -65,13 +74,10 @@ export default {
     io.socket.on('connect', function socketConnected() {
       console.log("connected");
       io.socket.get('/socket/watch/videos', function(data, jwers) {
-        console.log("subbed");
       });
       io.socket.get('/socket/watch/allVideos', function(data, jwers) {
-        console.log("subbed");
       });
       io.socket.on('videos', function(msg) {
-        console.log(msg);
         obj.videos = msg;
       });
     });
