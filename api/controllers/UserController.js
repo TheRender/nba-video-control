@@ -67,8 +67,8 @@ module.exports = {
                   meta: metaHead
                 },
                 components: [
-                  'views/dash/components/navbar',
-                  'views/dash/components/videolisting',
+                  'views/dash/components/Navbar',
+                  'views/dash/components/VideoListing',
                 ]
               }
             });
