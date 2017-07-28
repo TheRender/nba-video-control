@@ -85,7 +85,7 @@ export default {
       var obj = this;
       $.ajax({
         type: 'POST',
-        url: 'http://nba-api.therendersports.com/player/findFromname',
+        url: 'https://nba-api.therendersports.com/player/findFromname',
         data: { name: name },
         success: function(data) {
           if (data.player != undefined) {

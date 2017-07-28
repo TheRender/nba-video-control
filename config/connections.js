@@ -63,6 +63,11 @@ module.exports.connections = {
     database: 'nba-control' //optional
   },
 
+  prodMongoServer: {
+    adapter: 'sails-mongo',
+    url: process.env.MONGODB_URI
+  },
+
   /***************************************************************************
    *                                                                          *
    * PostgreSQL is another officially supported relational database.          *
