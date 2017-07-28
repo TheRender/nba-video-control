@@ -63,6 +63,10 @@ module.exports.connections = {
     database: 'nba-control' //optional
   },
 
+  prodMongoServer: {
+    url: process.env.MONGODB_URI
+  },
+
   /***************************************************************************
    *                                                                          *
    * PostgreSQL is another officially supported relational database.          *
