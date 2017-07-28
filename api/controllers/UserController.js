@@ -67,8 +67,8 @@ module.exports = {
                   meta: metaHead
                 },
                 components: [
-                  'views/dash/components/navbar',
-                  'views/dash/components/videolisting',
+                  '/views/dash/components/navbar',
+                  '/views/dash/components/videolisting',
                 ]
               }
             });
@@ -106,7 +106,7 @@ module.exports = {
               meta: list
             },
             components: [
-              'views/dash/components/Navbar',
+              '/views/dash/components/Navbar',
             ]
           }
         });
