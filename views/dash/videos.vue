@@ -6,13 +6,30 @@
       <div class="col-lg-12">
         <h1>Videos <a href="/addVideo" class="btn btn-success pull-right"><i class="fa fa-plus"></i> Add Video</a></h1>
         <div v-if="hasVideos">
-          <VideoList
-            v-for="video in videos"
-            v-bind:title="video.title"
-            v-bind:description="video.description"
-            v-bind:status="video.status"
-            :key="video.id"
-          ></VideoList>
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>
+                  Title
+                </th>
+                <th>
+                  Status
+                </th>
+                <th>
+                  Description
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <videolisting
+                v-for="video in videos"
+                v-bind:title="video.title"
+                v-bind:description="video.description"
+                v-bind:status="video.status"
+                :key="video.id"
+              ></videolisting>
+            </tbody>
+          </table>
         </div>
         <div v-else>
           <center>
@@ -30,7 +47,8 @@
 <script>
 export default {
   data() {
-    return {}
+    return {
+    }
   },
   computed: {
     hasVideos: function() {

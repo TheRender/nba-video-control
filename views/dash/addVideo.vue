@@ -15,6 +15,10 @@
             <input class="form-control" id="playerID" type="text" v-model="playerID" :value="playerID"/>
           </div>
           <div class="form-group">
+            <label for="date">Game Date</label>
+            <input id="date" type="date" class="form-control" v-model="date">
+          </div>
+          <div class="form-group">
             <label for="title">Title</label>
             <input class="form-control" id="title" type="text" v-model="title" />
           </div>
@@ -47,20 +51,32 @@ export default {
       title: "",
       description: "",
       tags: "",
-      playerID: ""
+      playerID: "",
+      date: "",
     }
   },
   methods: {
     addVideo: function() {
       var d = {
         title: this.title,
-        links: this.links,
+        links: splitLinks(),
         description: this.description,
         tags: this.tags,
         player: this.playerName,
       };
-      alert(this.playerName)
 
+      $.ajax({
+        type: 'POST',
+        url: '/video/new',
+        data: d,
+        success: function(data) {
+          if (data.success == true) {
+            window.location.href = "/videos";
+          } else {
+            alert("There was an error creating the video");
+          }
+        }
+      });
     },
     getVideoInfo: function() {
 
@@ -81,6 +97,11 @@ export default {
           }
         }
       });
+    }
+  },
+  computed: {
+    splitLinks: function() {
+      return this.links.split(",");
     }
   },
   mounted: function() {

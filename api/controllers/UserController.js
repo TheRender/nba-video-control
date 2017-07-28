@@ -22,7 +22,15 @@ var metaHead = [
   {
     script: 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js'
   },
+  {
+    script: 'https://cdnjs.cloudflare.com/ajax/libs/vue-strap/1.1.37/vue-strap.min.js'
+  },
+  {
+    script: '/js/moment.js'
+  },
 ];
+
+var DatePicker = require('vuejs-datepicker');
 
 module.exports = {
 
@@ -56,8 +64,8 @@ module.exports = {
                   meta: metaHead
                 },
                 components: [
-                  'views/dash/components/VideoList',
-                  'views/dash/components/Navbar',
+                  'views/dash/components/navbar',
+                  'views/dash/components/videolisting',
                 ]
               }
             });
@@ -82,7 +90,7 @@ module.exports = {
           },
           {
             script: 'https://cdnjs.cloudflare.com/ajax/libs/jquery-autocomplete/1.0.7/jquery.auto-complete.min.js'
-          }
+          },
         ];
         list = metaHead.concat(elem);
         res.render('dash/addVideo', {

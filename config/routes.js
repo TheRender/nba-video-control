@@ -91,6 +91,11 @@ module.exports.routes = {
     action: 'addVideo'
   },
 
+  'GET /socket/watch/videos': {
+    controller: 'video',
+    action: 'subscribeToVideos'
+  },
+
 
 
   /***************************************************************************

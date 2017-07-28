@@ -16,17 +16,36 @@ module.exports = {
       description: post.description,
       urls: post.urls
     };
-    Video.create(obj).exec(function(err, video) {
-      if (err || video == undefined) {
-        console.log("There was an error creating the video.");
-        console.log("Error = " + err);
-        res.serverError();
-      } else {
-        res.send({
-          success: true
+    async.series([
+      function(callback) {
+        Video.create(obj).exec(function(err, video) {
+          if (err || video == undefined) {
+            console.log("There was an error creating the video.");
+            console.log("Error = " + err);
+            res.serverError();
+          } else {
+            callback();
+          }
+        })
+      },
+      function(callback) {
+        Video.find({}).exec(function(err, videos) {
+          if (err || videos == undefined) {
+            console.log("There was an error finding the videos.");
+            console.log("Error = " + err);
+            res.serverError();
+          } else {
+            sails.sockets.broadcast('videos', videos);
+            callback();
+          }
         });
-      }
-    })
+      },
+    ], function(callback) {
+      res.send({
+        success: true
+      });
+    });
+
   },
 
   edit: function(req, res) {
@@ -37,8 +56,19 @@ module.exports = {
         console.log("Error = " + err);
         res.serverError();
       } else {
-        res.send({
-          success: true
+        Video.findOne({
+          id: post.id
+        }).exec(function(err, vid) {
+          if (err || vid == undefined) {
+            console.log("There was an error finding the vid.");
+            console.log("Error = " + err);
+            res.serverError();
+          } else {
+            sails.sockets.broadcast(vid.id, vid);
+            res.send({
+              success: true
+            });
+          }
         });
       }
     });
@@ -141,5 +171,37 @@ module.exports = {
           video: video
         });
       });
+  },
+
+  subscribeToVideos: function(req, res) {
+    Video.find({}).exec(function(err, videos) {
+      if (err || vidoes == undefined) {
+        console.log("There was an error finding the videos.");
+        console.log("Error = " + err);
+        res.serverError();
+      } else {
+        async.each(videos, function(video, callback) {
+          sails.sockets.join(req, video.id, function(err) {
+            if (err) {
+              console.log("There was an error subscribing to the monitor.");
+              console.log("Error = " + err);
+              res.serverError();
+            } else {
+              callback();
+            }
+          });
+        }, function(err) {
+          if (err) {
+            console.log("There was an error finishing the async.");
+            console.log("Error = " + err);
+            res.serverError();
+          } else {
+            res.send({
+              success: true
+            });
+          }
+        });
+      }
+    });
   },
 };

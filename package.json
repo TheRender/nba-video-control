@@ -28,7 +28,8 @@
     "request": "^2.81.0",
     "sails": "~0.12.4",
     "sails-disk": "~0.10.9",
-    "sails-mongo": "^0.12.2"
+    "sails-mongo": "^0.12.2",
+    "vuejs-datepicker": "^0.9.4"
   },
   "scripts": {
     "debug": "node debug app.js",

@@ -9,7 +9,7 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="/">The Render | NBA Videos</a>
+        <a class="navbar-brand" href="/videos">The Render | NBA Videos</a>
       </div>
 
       <!-- Collect the nav links, forms, and other content for toggling -->

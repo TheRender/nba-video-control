@@ -35,7 +35,6 @@ export default {
         username: this.email,
         password: this.password
       };
-
       $.ajax({
         type: 'POST',
         url: '/login',
