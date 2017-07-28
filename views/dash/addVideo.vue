@@ -34,7 +34,7 @@
             <label for="links">Links</label>
             <textarea class="form-control" rows="5" id="links" v-model="links"></textarea>
           </div>
-          <button @click="addVideo()" class="btn btn-success"><i class="fa fa-plus"></i> Add Video to Queue</button>
+          <a @click="addVideo()" class="btn btn-success"><i class="fa fa-plus"></i> Add Video to Queue</a>
         </form>
       </div>
     </div>
@@ -59,7 +59,7 @@ export default {
     addVideo: function() {
       var d = {
         title: this.title,
-        links: splitLinks(),
+        links: this.splitLinks,
         description: this.description,
         tags: this.tags,
         player: this.playerName,

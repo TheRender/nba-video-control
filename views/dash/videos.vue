@@ -59,6 +59,22 @@ export default {
         return false;
       }
     }
+  },
+  mounted: function() {
+    var obj = this;
+    io.socket.on('connect', function socketConnected() {
+      console.log("connected");
+      io.socket.get('/socket/watch/videos', function(data, jwers) {
+        console.log("subbed");
+      });
+      io.socket.get('/socket/watch/allVideos', function(data, jwers) {
+        console.log("subbed");
+      });
+      io.socket.on('videos', function(msg) {
+        console.log(msg);
+        obj.videos = msg;
+      });
+    });
   }
 };
 </script>

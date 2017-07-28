@@ -28,6 +28,9 @@ var metaHead = [
   {
     script: '/js/moment.js'
   },
+  {
+    script: '/js/dependencies/sails.io.js'
+  },
 ];
 
 var DatePicker = require('vuejs-datepicker');

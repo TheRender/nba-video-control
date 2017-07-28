@@ -35,7 +35,7 @@ module.exports = {
             console.log("Error = " + err);
             res.serverError();
           } else {
-            sails.sockets.broadcast('videos', videos);
+            sails.sockets.blast('videos', videos);
             callback();
           }
         });
@@ -64,7 +64,7 @@ module.exports = {
             console.log("Error = " + err);
             res.serverError();
           } else {
-            sails.sockets.broadcast(vid.id, vid);
+            sails.sockets.blast(vid.id, vid);
             res.send({
               success: true
             });
@@ -173,9 +173,23 @@ module.exports = {
       });
   },
 
+  subToAllVids: function(req, res) {
+    sails.sockets.join(req, 'videos', function(err) {
+      if (err) {
+        res.send({
+          error: true
+        });
+      } else {
+        res.send({
+          success: true
+        });
+      }
+    });
+  },
+
   subscribeToVideos: function(req, res) {
     Video.find({}).exec(function(err, videos) {
-      if (err || vidoes == undefined) {
+      if (err || videos == undefined) {
         console.log("There was an error finding the videos.");
         console.log("Error = " + err);
         res.serverError();
