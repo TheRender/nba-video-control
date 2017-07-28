@@ -10,31 +10,27 @@
             <thead>
               <tr>
                 <th>
-                  Title
-                </th>
-                <th>
                   Player Name
                 </th>
                 <th>
                   Status
                 </th>
                 <th>
-                  Description
+                  Machine
                 </th>
                 <th>
-                  Machine
+                  Creator
                 </th>
               </tr>
             </thead>
             <tbody>
               <videolisting
                 v-for="video in videos"
-                v-bind:initialtitle="video.title"
-                v-bind:initialdescription="video.description"
                 v-bind:initialstatus="video.status"
                 v-bind:initialplayer="video.player"
                 v-bind:initialmachine="video.machine"
                 v-bind:initialid="video.id"
+                v-bind:initialuser="video.user"
                 :key="video.id"
               ></videolisting>
             </tbody>

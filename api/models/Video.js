@@ -32,6 +32,10 @@ module.exports = {
 
     machine: {
       type: 'string'
-    }
+    },
+
+    user: {
+      type: 'string'
+    },
   }
 };

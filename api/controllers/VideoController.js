@@ -8,45 +8,55 @@
 module.exports = {
 
   new: function(req, res) {
-    var post = req.body;
-    var obj = {
-      title: post.title,
-      status: "Queued",
-      player: post.player,
-      description: post.description,
-      urls: post.urls,
-      machine: "Not assigned"
-    };
-    async.series([
-      function(callback) {
-        Video.create(obj).exec(function(err, video) {
-          if (err || video == undefined) {
-            console.log("There was an error creating the video.");
-            console.log("Error = " + err);
-            res.serverError();
-          } else {
-            callback();
-          }
-        })
-      },
-      function(callback) {
-        Video.find({}).exec(function(err, videos) {
-          if (err || videos == undefined) {
-            console.log("There was an error finding the videos.");
-            console.log("Error = " + err);
-            res.serverError();
-          } else {
-            sails.sockets.blast('videos', videos);
-            callback();
-          }
+    User.findOne({
+      id: req.user.id
+    }).populateAll().exec(function(err, user) {
+      if (err || user == undefined) {
+        console.log("There was an error finding the user.");
+        console.log("Error = " + error);
+        res.serverError();
+      } else {
+        var post = req.body;
+        var obj = {
+          title: post.title,
+          status: "Queued",
+          player: post.player,
+          description: post.description,
+          urls: post.urls,
+          machine: "Not assigned",
+          user: user.fullName
+        };
+        async.series([
+          function(callback) {
+            Video.create(obj).exec(function(err, video) {
+              if (err || video == undefined) {
+                console.log("There was an error creating the video.");
+                console.log("Error = " + err);
+                res.serverError();
+              } else {
+                callback();
+              }
+            })
+          },
+          function(callback) {
+            Video.find({}).exec(function(err, videos) {
+              if (err || videos == undefined) {
+                console.log("There was an error finding the videos.");
+                console.log("Error = " + err);
+                res.serverError();
+              } else {
+                sails.sockets.blast('videos', videos);
+                callback();
+              }
+            });
+          },
+        ], function(callback) {
+          res.send({
+            success: true
+          });
         });
-      },
-    ], function(callback) {
-      res.send({
-        success: true
-      });
+      }
     });
-
   },
 
   edit: function(req, res) {

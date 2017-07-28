@@ -2,19 +2,16 @@
 <template>
   <tr v-bind:class="{ warning: isQueued, success: isFinished, info: isUploading, danger: isError}">
     <td>
-      {{ title }}
-    </td>
-    <td>
       {{ player }}
     </td>
     <td>
       {{ status }}
     </td>
     <td>
-      {{ description }}
+      {{ machine }}
     </td>
     <td>
-      {{ machine }}
+      {{ user }}
     </td>
   </tr>
 </template>
@@ -22,15 +19,14 @@
 
 <script>
 export default {
-    props: [ 'initialtitle', 'initialstatus', 'initialdescription', 'initialplayer', 'initialmachine', 'initialid'],
+    props: [ 'initialstatus', 'initialplayer', 'initialmachine', 'initialid', 'initialuser'],
     data() {
       return {
-        title: "",
         status: "",
-        description: "",
         player: "",
         machine: "",
         id: "",
+        user: ""
       }
     },
     methods: {
@@ -50,17 +46,14 @@ export default {
       }
     },
     mounted: function() {
-      this.title = this.initialtitle;
       this.status = this.initialstatus;
-      this.description = this.initialdescription;
       this.machine = this.initialmachine;
       this.player = this.initialplayer;
       this.id = this.initialid;
+      this.user = this.initialuser;
       var obj = this;
       io.socket.on(obj.id, function(msg) {
-        obj.title = msg.title;
         obj.status = msg.status;
-        obj.description = msg.description;
         obj.machine = msg.machine;
         obj.player = msg.player;
       });
