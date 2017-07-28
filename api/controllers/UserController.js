@@ -76,6 +76,15 @@ module.exports = {
         console.log("Error = " + error);
         res.serverError();
       } else {
+        var elem = [{
+            style: 'https://cdnjs.cloudflare.com/ajax/libs/jquery-autocomplete/1.0.7/jquery.auto-complete.min.css',
+            rel: 'stylesheet'
+          },
+          {
+            script: 'https://cdnjs.cloudflare.com/ajax/libs/jquery-autocomplete/1.0.7/jquery.auto-complete.min.js'
+          }
+        ];
+        list = metaHead.concat(elem);
         res.render('dash/addVideo', {
           data: {
             user: user
@@ -83,7 +92,7 @@ module.exports = {
           vue: {
             head: {
               title: "Add Video | The Render Sports",
-              meta: metaHead
+              meta: list
             },
             components: [
               'views/dash/components/Navbar',
