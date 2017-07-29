@@ -21,6 +21,8 @@ module.exports.http = {
    *                                                                           *
    ****************************************************************************/
 
+
+
   middleware: {
 
     passportInit: require('passport').initialize(),
@@ -51,15 +53,12 @@ module.exports.http = {
       'favicon',
       '404',
       '500',
-      "customMiddleware"
+      'customVue'
     ],
 
-    customMiddleware: function(app) {
+    customVue: function(req, res, next) {
       app.set('vue', {
-        // configure express-vue here
-        // do not use __dirname here, otherwise the path will look like:
-        // /Users/username/your-project/config/components
-        // componentsDir: app.settings.views + '/components',
+
       });
     },
 

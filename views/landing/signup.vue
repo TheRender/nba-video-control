@@ -29,7 +29,7 @@
               <label for="signupKey">Signup Key</label>
               <input id="signupKey" class="form-control" type="password" v-model="signupkey" placeholder="********"/>
             </div>
-            <button class="btn btn-success" @click="processLogin()">Login</button>
+            <a href="#" class="btn btn-success" @click="processLogin()">Login</a>
           </form>
         </div>
       </div>
@@ -66,10 +66,9 @@ export default {
         data: d,
         success: function(data) {
           if (data.success == true) {
-            alert("Success");
+            window.location.reload();
           } else {
-            alert("Failure");
-            console.log(data.message);
+            alert("error");
           }
         }
       });

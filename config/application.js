@@ -68,8 +68,7 @@ passport.use(new LocalStrategy(
           bcrypt.compare(password, user.password, function(err, res) {
             if (res != true) {
               return done("INVALID PASSWORD", null, {
-                message: "Invalid Password",
-                user: user
+                message: "Invalid Password"
               });
             } else {
               return done(null, user);
@@ -82,10 +81,10 @@ passport.use(new LocalStrategy(
 ));
 
 module.exports = {
-  appName: 'nba-video-control',
+  appName: 'Hindsite',
   // Custom express middleware - we use this to register the passport middlware
   http: {
-    customMiddleWare: function(app) {
+    customerMiddleWare: function(app) {
       app.use(passport.initialize());
       app.use(passport.session());
       app.use(app.router);
