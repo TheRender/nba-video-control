@@ -69,13 +69,20 @@ module.exports = {
         console.log("Error = " + err);
         res.serverError();
       } else {
-        console.log(post.id);
-        console.log("UPDATED");
-        console.log(updated[0]);
-        sails.sockets.blast(updated[0].id, updated[0]);
-        res.send({
-          success: true
-        });
+        if (updated.length == 0) {
+          res.send({
+            success: false,
+            message: "No vidoes updated"
+          });
+        } else {
+          console.log(post.id);
+          console.log("UPDATED");
+          console.log(updated[0]);
+          sails.sockets.blast(updated[0].id, updated[0]);
+          res.send({
+            success: true
+          });
+        }
       }
     });
   },
