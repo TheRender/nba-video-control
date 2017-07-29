@@ -33,8 +33,6 @@ var metaHead = [
   },
 ];
 
-var DatePicker = require('vuejs-datepicker');
-
 module.exports = {
 
   viewVideos: function(req, res) {
