@@ -2,6 +2,7 @@
 <div>
   <Navbar v-bind:user="user"></Navbar>
   <div class="container">
+    <Breadcrumb v-bind:crumbs="crumbData"></Breadcrumb>
     <div class="row">
       <div class="col-lg-12">
         <h1>Add Video </h1>
@@ -100,6 +101,12 @@ export default {
   computed: {
     splitLinks: function() {
       return this.links.split(",");
+    },
+    crumbData: function() {
+      return [
+        { href: "/videos", description: "Videos"},
+        { href: "/videos/addVideo", description: "Add Video"},
+      ]
     }
   },
   mounted: function() {

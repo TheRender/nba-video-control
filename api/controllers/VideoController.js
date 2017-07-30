@@ -24,7 +24,8 @@ module.exports = {
           description: post.description,
           urls: post.urls,
           machine: "Not assigned",
-          user: user.fullName
+          user: user.fullName,
+          tags: post.tags,
         };
         async.series([
           function(callback) {
