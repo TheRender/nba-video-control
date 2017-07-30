@@ -23,27 +23,94 @@
 module.exports.routes = {
 
   /***************************************************************************
-  *                                                                          *
-  * Make the view located at `views/homepage.ejs` (or `views/homepage.jade`, *
-  * etc. depending on your default view engine) your home page.              *
-  *                                                                          *
-  * (Alternatively, remove this and add an `index.html` file in your         *
-  * `assets` directory)                                                      *
-  *                                                                          *
-  ***************************************************************************/
+   *                                                                          *
+   * Make the view located at `views/homepage.ejs` (or `views/homepage.jade`, *
+   * etc. depending on your default view engine) your home page.              *
+   *                                                                          *
+   * (Alternatively, remove this and add an `index.html` file in your         *
+   * `assets` directory)                                                      *
+   *                                                                          *
+   ***************************************************************************/
 
   '/': {
     view: 'homepage'
-  }
+  },
+
+  'GET /login': {
+    controller: 'home',
+    action: 'login'
+  },
+
+  'GET /signup': {
+    controller: 'home',
+    action: 'signup'
+  },
+
+  'POST /login': {
+    controller: 'auth',
+    action: 'login'
+  },
+
+  'POST /signup': {
+    controller: 'auth',
+    action: 'signup'
+  },
+
+  'GET /logout': {
+    controller: 'auth',
+    action: 'logout'
+  },
+
+  'GET /videos': {
+    controller: 'user',
+    action: 'viewVideos'
+  },
+
+  'POST /video/new': {
+    controller: 'video',
+    action: 'new'
+  },
+
+  'POST /video/edit': {
+    controller: 'video',
+    action: 'edit'
+  },
+
+  'POST /video/delete': {
+    controller: 'video',
+    action: 'delete'
+  },
+
+  'GET /videos/queue': {
+    controller: 'video',
+    action: 'readyQueue'
+  },
+
+  'GET /addVideo': {
+    controller: 'user',
+    action: 'addVideo'
+  },
+
+  'GET /socket/watch/videos': {
+    controller: 'video',
+    action: 'subscribeToVideos'
+  },
+
+  'GET /socket/watch/allVideos': {
+    controller: 'video',
+    action: 'subToAllVids'
+  },
+
+
 
   /***************************************************************************
-  *                                                                          *
-  * Custom routes here...                                                    *
-  *                                                                          *
-  * If a request to a URL doesn't match any of the custom routes above, it   *
-  * is matched against Sails route blueprints. See `config/blueprints.js`    *
-  * for configuration options and examples.                                  *
-  *                                                                          *
-  ***************************************************************************/
+   *                                                                          *
+   * Custom routes here...                                                    *
+   *                                                                          *
+   * If a request to a URL doesn't match any of the custom routes above, it   *
+   * is matched against Sails route blueprints. See `config/blueprints.js`    *
+   * for configuration options and examples.                                  *
+   *                                                                          *
+   ***************************************************************************/
 
 };
