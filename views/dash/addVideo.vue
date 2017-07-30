@@ -64,7 +64,6 @@ export default {
         tags: this.tags,
         player: this.playerName,
       };
-
       $.ajax({
         type: 'POST',
         url: '/video/new',
@@ -79,7 +78,6 @@ export default {
       });
     },
     getVideoInfo: function() {
-
     },
     getNameInfo: function(name) {
       var obj = this;

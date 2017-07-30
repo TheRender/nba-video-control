@@ -21,12 +21,7 @@ module.exports.http = {
    *                                                                           *
    ****************************************************************************/
 
-
-
   middleware: {
-
-    passportInit: require('passport').initialize(),
-    passportSession: require('passport').session(),
 
     /***************************************************************************
      *                                                                          *
@@ -34,6 +29,9 @@ module.exports.http = {
      * router is invoked by the "router" middleware below.)                     *
      *                                                                          *
      ***************************************************************************/
+
+    passportInit: require('passport').initialize(),
+    passportSession: require('passport').session(),
 
     order: [
       'startRequestTimer',
@@ -53,20 +51,20 @@ module.exports.http = {
       'favicon',
       '404',
       '500',
-      'customVue'
+      'customMiddleware'
     ],
-
-    customVue: function(req, res, next) {
-      app.set('vue', {
-
-      });
-    },
 
     /****************************************************************************
      *                                                                           *
      * Example custom middleware; logs each request to the console.              *
      *                                                                           *
      ****************************************************************************/
+
+    customMiddleware: function(req, res, next) {
+      app.set('vue', {
+        // TODO :: Configure Vue.js options here
+      });
+    },
 
     // myRequestLogger: function (req, res, next) {
     //     console.log("Requested :: ", req.method, req.url);
