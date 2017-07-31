@@ -66,6 +66,11 @@ module.exports.routes = {
     action: 'viewVideos'
   },
 
+  'GET /videos/view/:videoID': {
+    controller: 'user',
+    action: 'viewSpecificVideo'
+  },
+
   'POST /video/new': {
     controller: 'video',
     action: 'new'

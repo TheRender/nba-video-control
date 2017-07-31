@@ -22,7 +22,9 @@ module.exports = {
       unique: true
     },
 
-    password: 'string',
+    password: {
+      type: 'string'
+    },
 
     toJSON: function() {
       var obj = this.toObject();

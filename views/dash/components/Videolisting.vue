@@ -13,6 +13,9 @@
     <td>
       {{ user }}
     </td>
+    <td>
+      <a :href="viewLink" class="">View</a>
+    </td>
   </tr>
 </template>
 
@@ -43,6 +46,9 @@ export default {
       },
       isError: function() {
         return this.status.toLowerCase().includes('error');
+      },
+      viewLink: function() {
+        return "/videos/view/" + this.id;
       }
     },
     mounted: function() {

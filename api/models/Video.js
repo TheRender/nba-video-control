@@ -25,6 +25,10 @@ module.exports = {
       type: 'string'
     },
 
+    tags: {
+      type: 'string'
+    },
+
     urls: {
       type: 'array',
       defaultsTo: []

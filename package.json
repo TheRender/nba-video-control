@@ -1,11 +1,10 @@
 {
-  "name": "nba-video-control",
+  "name": "temp",
   "private": true,
   "version": "0.0.0",
   "description": "a Sails application",
   "keywords": [],
   "dependencies": {
-    "axios": "^0.16.2",
     "bcrypt-nodejs": "0.0.3",
     "connect-redis": "^3.3.0",
     "ejs": "2.3.4",
@@ -22,15 +21,13 @@
     "grunt-contrib-watch": "1.0.0",
     "grunt-sails-linker": "~0.10.1",
     "grunt-sync": "0.5.2",
-    "include-all": "~0.1.6",
+    "include-all": "^1.0.0",
     "passport": "^0.3.2",
     "passport-local": "^1.0.0",
     "rc": "1.0.1",
-    "request": "^2.81.0",
-    "sails": "^0.12.13",
+    "sails": "~0.12.13",
     "sails-disk": "~0.10.9",
-    "sails-mongo": "^0.12.2",
-    "vuejs-datepicker": "^0.9.4"
+    "sails-mongo": "^0.12.2"
   },
   "scripts": {
     "debug": "node debug app.js",
@@ -39,12 +36,8 @@
   "main": "app.js",
   "repository": {
     "type": "git",
-    "url": "git://github.com/root/nba-video-control.git"
+    "url": "git://github.com/steventhanna/temp.git"
   },
-  "engines": {
-    "npm": "5.3.0",
-    "node": "8.1.4"
-  },
-  "author": "root",
+  "author": "steventhanna",
   "license": ""
 }

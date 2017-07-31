@@ -60,12 +60,12 @@ module.exports.connections = {
     adapter: 'sails-mongo',
     host: 'localhost',
     port: 27017,
-    database: 'nba-video-control' //optional
+    database: 'nba-video-control'
   },
 
-  prodMongoServer: {
+  prodMongodbServer: {
     adapter: 'sails-mongo',
-    url: process.env.MONGODB_URI
+    url: process.env.MONGO_URL
   },
 
   /***************************************************************************

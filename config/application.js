@@ -57,6 +57,8 @@ passport.use(new LocalStrategy(
     process.nextTick(function() {
       // Find the user by username. If there is no user with the given username, or the password is not correct, set the user to false to indicate failure and send some sort of flash message or newer equaivalent
       // Otherwise, return an authenticated user.
+      console.log(username);
+      console.log(password);
       findByUsername(username, function(err, user) {
         if (err) {
           return done(err);
@@ -71,6 +73,7 @@ passport.use(new LocalStrategy(
                 message: "Invalid Password"
               });
             } else {
+              console.log("GOOD");
               return done(null, user);
             }
           });
@@ -81,10 +84,9 @@ passport.use(new LocalStrategy(
 ));
 
 module.exports = {
-  appName: 'Hindsite',
   // Custom express middleware - we use this to register the passport middlware
   http: {
-    customerMiddleWare: function(app) {
+    customMiddleWare: function(app) {
       app.use(passport.initialize());
       app.use(passport.session());
       app.use(app.router);

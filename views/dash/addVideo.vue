@@ -2,6 +2,7 @@
 <div>
   <Navbar v-bind:user="user"></Navbar>
   <div class="container">
+    <Breadcrumb v-bind:crumbs="crumbData"></Breadcrumb>
     <div class="row">
       <div class="col-lg-12">
         <h1>Add Video </h1>
@@ -59,12 +60,11 @@ export default {
     addVideo: function() {
       var d = {
         title: this.title,
-        links: this.splitLinks,
+        urls: this.splitLinks,
         description: this.description,
         tags: this.tags,
         player: this.playerName,
       };
-
       $.ajax({
         type: 'POST',
         url: '/video/new',
@@ -79,7 +79,6 @@ export default {
       });
     },
     getVideoInfo: function() {
-
     },
     getNameInfo: function(name) {
       var obj = this;
@@ -102,6 +101,12 @@ export default {
   computed: {
     splitLinks: function() {
       return this.links.split(",");
+    },
+    crumbData: function() {
+      return [
+        { href: "/videos", description: "Videos"},
+        { href: "/videos/addVideo", description: "Add Video"},
+      ]
     }
   },
   mounted: function() {

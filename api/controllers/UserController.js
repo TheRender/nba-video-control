@@ -105,7 +105,50 @@ module.exports = {
             },
             components: [
               'views/dash/components/Navbar',
+              'views/dash/components/Breadcrumb'
             ]
+          }
+        });
+      }
+    });
+  },
+
+  viewSpecificVideo: function(req, res) {
+    req.validate({
+      videoID: 'string'
+    });
+    User.findOne({
+      id: req.user.id
+    }).populateAll().exec(function(err, user) {
+      if (err || user == undefined) {
+        console.log("There was an error finding the user.");
+        console.log("Error = " + error);
+        res.serverError();
+      } else {
+        Video.findOne({
+          id: req.param('videoID')
+        }).exec(function(err, video) {
+          if (err || video == undefined) {
+            console.log("There was an error finding the video.");
+            console.log("Error = " + err);
+            res.serverError();
+          } else {
+            res.render('dash/viewVideo', {
+              data: {
+                user: user,
+                video: video
+              },
+              vue: {
+                head: {
+                  title: "View Video | The Render Sports",
+                  meta: metaHead
+                },
+                components: [
+                  'views/dash/components/Navbar',
+                  'views/dash/components/Breadcrumb'
+                ]
+              }
+            });
           }
         });
       }

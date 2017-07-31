@@ -38,8 +38,6 @@
 </template>
 
 <script>
-
-
 export default {
   data() {
     return {
@@ -66,7 +64,7 @@ export default {
         data: d,
         success: function(data) {
           if (data.success == true) {
-            window.location.reload();
+            window.location = "/videos";
           } else {
             alert("error");
           }
