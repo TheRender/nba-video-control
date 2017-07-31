@@ -99,7 +99,7 @@ export default {
     },
     hasError: function() {
       return this.status.toLowerCase().includes('error');
-    }
+    },
     crumbData: function() {
       return [
         { href: "/videos", description: "Videos"},
