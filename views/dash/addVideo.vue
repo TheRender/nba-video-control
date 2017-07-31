@@ -64,6 +64,7 @@ export default {
         description: this.description,
         tags: this.tags,
         player: this.playerName,
+        playerID: this.playerID
       };
       $.ajax({
         type: 'POST',

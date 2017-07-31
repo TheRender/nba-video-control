@@ -5,7 +5,7 @@
     <Breadcrumb v-bind:crumbs="crumbData"></Breadcrumb>
     <div class="row">
       <div class="col-lg-12">
-        <h1>{{ playerName }} <button v-if="isQueued" @click="deleteVideo()" class="btn btn-danger pull-right">Delete Video</button></h1>
+        <h1>{{ playerName }} <button v-if="isQueued" @click="deleteVideo()" class="btn btn-danger pull-right">Delete Video</button> <button v-if="hasError" @click="addBackToQueue()" class="btn btn-warning pull-right">Add back to Queue</button></h1>
         <h2>{{ title }}</h2>
         <h3><span v-bind:class="color">{{ status }}</span> - {{ machine }}</h3>
         <p>
@@ -60,6 +60,26 @@ export default {
           }
         }
       });
+    },
+    addBackToQueue: function() {
+      var obj = this;
+      var d = {
+        id: obj.videoID,
+        status: "Queued",
+        machine: ""
+      }
+      $.ajax({
+        type: 'POST',
+        url: '/video/edit',
+        data: d,
+        success: function(data) {
+          if (data.success == true) {
+            window.location.href = "/videos"
+          } else {
+            alert("Error changing the status")
+          }
+        }
+      });
     }
   },
   computed: {
@@ -77,6 +97,9 @@ export default {
     isQueued: function() {
       return this.status == "Queued";
     },
+    hasError: function() {
+      return this.status.toLowerCase().includes('error');
+    }
     crumbData: function() {
       return [
         { href: "/videos", description: "Videos"},

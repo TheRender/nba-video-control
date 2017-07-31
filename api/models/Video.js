@@ -21,6 +21,10 @@ module.exports = {
       type: 'string'
     },
 
+    playerID: {
+      type: 'string'
+    },
+
     description: {
       type: 'string'
     },

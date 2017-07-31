@@ -26,6 +26,7 @@ module.exports = {
           machine: "Not assigned",
           user: user.fullName,
           tags: post.tags,
+          playerID: post.playerID
         };
         async.series([
           function(callback) {
