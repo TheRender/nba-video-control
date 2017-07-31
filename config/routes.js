@@ -91,6 +91,11 @@ module.exports.routes = {
     action: 'readyQueue'
   },
 
+  'GET /videos/queue/latest': {
+    controller: 'video',
+    action: 'getLatest'
+  },
+
   'GET /addVideo': {
     controller: 'user',
     action: 'addVideo'
