@@ -147,16 +147,26 @@ module.exports = {
               res.serverError();
             } else {
               state = states;
+              callback();
             }
           });
         },
         function(callback) {
           if (state.locked == true) {
             res.send({
+              error: true,
               locked: state.locked
             });
           } else {
-            callback();
+            StateService.toggle(function(err, state) {
+              if (err || state == undefined) {
+                console.log("There was an error toggling the state.");
+                console.log("Error = " + err);
+                res.serverError();
+              } else {
+                callback();
+              }
+            });
           }
         },
         function(callback) {
@@ -175,6 +185,17 @@ module.exports = {
               res.serverError();
             } else {
               video = videos[0];
+              callback();
+            }
+          });
+        },
+        function(callback) {
+          StateService.toggle(function(err, state) {
+            if (err || state == undefined) {
+              console.log("There was an error toggling the state.");
+              console.log("Error = " + err);
+              res.serverError();
+            } else {
               callback();
             }
           });
