@@ -62,6 +62,7 @@ module.exports = {
 
   edit: function(req, res) {
     var post = req.body;
+    console.log(post);
     Video.update({
       id: post.id
     }, post).exec(function(err, updated) {
