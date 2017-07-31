@@ -28,7 +28,7 @@
             </thead>
             <tbody>
               <videolisting
-                v-for="video in videos"
+                v-for="video in removeFinished"
                 v-bind:initialstatus="video.status"
                 v-bind:initialplayer="video.player"
                 v-bind:initialmachine="video.machine"
@@ -59,14 +59,19 @@ export default {
     }
   },
   computed: {
+    removeFinished: function() {
+      return this.videos.filter(function(elem) {
+        return elem.status != "Finished"
+      });
+    },
     hasVideos: function() {
-      if (this.videos != undefined && this.videos.length > 0) {
-        console.log(this.videos.length);
+      if (this.removeFinished != undefined && this.removeFinished.length > 0) {
+        console.log(this.removeFinished.length);
         return true;
       } else {
         return false;
       }
-    }
+    },
   },
   mounted: function() {
     var obj = this;

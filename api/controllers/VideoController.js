@@ -26,6 +26,7 @@ module.exports = {
           machine: "Not assigned",
           user: user.fullName,
           tags: post.tags,
+          playerID: post.playerID
         };
         async.series([
           function(callback) {
@@ -62,6 +63,7 @@ module.exports = {
 
   edit: function(req, res) {
     var post = req.body;
+    console.log(post);
     Video.update({
       id: post.id
     }, post).exec(function(err, updated) {
@@ -73,7 +75,8 @@ module.exports = {
         if (updated.length == 0) {
           res.send({
             success: false,
-            message: "No vidoes updated"
+            message: "No vidoes updated",
+            post: req.body
           });
         } else {
           console.log(post.id);
@@ -147,16 +150,26 @@ module.exports = {
               res.serverError();
             } else {
               state = states;
+              callback();
             }
           });
         },
         function(callback) {
           if (state.locked == true) {
             res.send({
+              error: true,
               locked: state.locked
             });
           } else {
-            callback();
+            StateService.toggle(function(err, state) {
+              if (err || state == undefined) {
+                console.log("There was an error toggling the state.");
+                console.log("Error = " + err);
+                res.serverError();
+              } else {
+                callback();
+              }
+            });
           }
         },
         function(callback) {
@@ -175,6 +188,17 @@ module.exports = {
               res.serverError();
             } else {
               video = videos[0];
+              callback();
+            }
+          });
+        },
+        function(callback) {
+          StateService.toggle(function(err, state) {
+            if (err || state == undefined) {
+              console.log("There was an error toggling the state.");
+              console.log("Error = " + err);
+              res.serverError();
+            } else {
               callback();
             }
           });
