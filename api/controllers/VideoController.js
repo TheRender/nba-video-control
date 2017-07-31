@@ -75,7 +75,7 @@ module.exports = {
           res.send({
             success: false,
             message: "No vidoes updated",
-            post: post
+            post: req.body
           });
         } else {
           console.log(post.id);
