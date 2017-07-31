@@ -5,7 +5,7 @@
     <Breadcrumb v-bind:crumbs="crumbData"></Breadcrumb>
     <div class="row">
       <div class="col-lg-12">
-        <h1>{{ playerName }}</h1>
+        <h1>{{ playerName }} <button v-if="isQueued" @click="deleteVideo()" class="btn btn-danger pull-right">Delete Video</button></h1>
         <h2>{{ title }}</h2>
         <h3><span v-bind:class="color">{{ status }}</span> - {{ machine }}</h3>
         <p>
@@ -13,13 +13,15 @@
         </p>
         <br />
         <h3>Links</h3>
-        <pre>
-          {{ links }}
-        </pre>
+        <ol>
+          <li v-for="link in links">
+            {{ link }}
+          </li>
+        </ol>
         <h3>Tags</h3>
-        <pre>
+        <p>
           {{ tags }}
-        </pre>
+        </p>
     </div>
   </div>
 </div>
@@ -40,6 +42,26 @@ export default {
       machine: ""
     }
   },
+  methods: {
+    deleteVideo: function() {
+      var obj = this;
+      var d = {
+        videoID: obj.videoID
+      };
+      $.ajax({
+        type: 'POST',
+        url: '/video/delete',
+        data: d,
+        success: function(data) {
+          if (data.success == true) {
+            window.location.href = "/videos"
+          } else {
+            alert("Error deleting the video");
+          }
+        }
+      });
+    }
+  },
   computed: {
     splitLinks: function() {
       return this.links.split(",");
@@ -51,6 +73,9 @@ export default {
         'text-warning': this.status == "Queued",
         'text-info': this.status == "Uploading"
       }
+    },
+    isQueued: function() {
+      return this.status == "Queued";
     },
     crumbData: function() {
       return [
@@ -74,5 +99,6 @@ export default {
       obj.machine = msg.machine;
     });
   },
+
 };
 </script>

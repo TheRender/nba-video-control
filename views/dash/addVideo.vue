@@ -60,7 +60,7 @@ export default {
     addVideo: function() {
       var d = {
         title: this.title,
-        links: this.splitLinks,
+        urls: this.splitLinks,
         description: this.description,
         tags: this.tags,
         player: this.playerName,
