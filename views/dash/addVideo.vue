@@ -79,7 +79,19 @@ export default {
         }
       });
     },
-    getVideoInfo: function() {
+    getVideoInfo: function(playerID) {
+      var obj = this;
+      $.ajax({
+        type: 'GET',
+        url: 'https://nba-api.therendersports.com/videos/information/' + playerID,
+        success: function(data) {
+          var video = data.video;
+          obj.title = video.title;
+          obj.description = video.description;
+          obj.tags = video.tags;
+          console.log(data);
+        }
+      });
     },
     getNameInfo: function(name) {
       var obj = this;
@@ -92,12 +104,12 @@ export default {
             console.log("Got name info");
             obj.playerID = data.player.id
             obj.playerName = name;
-            console.log(this.playerID);
-            console.log(this.playerName);
+            obj.getVideoInfo(obj.playerID);
           }
         }
       });
-    }
+    },
+
   },
   computed: {
     splitLinks: function() {
